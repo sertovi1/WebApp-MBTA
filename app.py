@@ -8,14 +8,13 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-
 @app.route('/mbta/', methods=['GET', 'POST'])
 def mbta():
     if request.method == 'POST':
         place_name = request.form.get('place_name')
         nearest_station, accessible = find_stop_near(place_name)
 
-        if nearest_station:
+        if nearest_station: #if a station exists
             return render_template("station_found.html", 
                 place_name=place_name, 
                 nearest_station=nearest_station, 
